@@ -1,15 +1,27 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from datetime import datetime, date
 
-# class openacademy(models.Model):
-#     _name = 'openacademy.openacademy'
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
+class Section(models.Model):
+    _name = 'school.section'
+
+    name = fields.Char(string="Name")
+    instructor_id = fields.Many2one('res.partner', string="Instructor")
+    seats = fields.Integer(string="Number of Seats")
+    student_ids = fields.Many2one('school.student',
+                                  string="Student")
+    student_count = fields.Integer(string="Student count")
+    color = fields.Integer()
+    start_date = fields.Date(default=fields.Date.today,
+                             string="Start Date")
+    duration = fields.Float(help="Duration in days")
+    end_date = fields.Date(string="End Date")
+
+class Student(models.Model):
+    _name = 'school.student'
+
+    name = fields.Char(string="Name")
+    section_id = fields.Many2one('school.section',
+                                 string="Sections")
