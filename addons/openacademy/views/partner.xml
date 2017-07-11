@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        
+        <!--partner-->
        <record id="partner_form" model="ir.ui.view">
            <field name="name">partner.partner</field>
            <field name="model">res.partner</field>

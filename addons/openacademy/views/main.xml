@@ -8,25 +8,39 @@
             <field name="model">school.section</field>
             <field name="arch" type="xml">
                 <form string="Section Form">
-                    <!--<header>-->
-
-                    <!--</header>-->
                     <sheet>
                         <group>
-                            <group string="General">
-                                <field name="student_ids"/>
-                                <field name="name"/>
-                                <field name="instructor_id"/>
-                                <field name="student_count"/>
-                            </group>
-                            <group string="Schedule">
-                                <field name="start_date"/>
-                                <field name="duration"/>
-                                <field name="seats"/>
-                                <field name="color"/>
-                                <field name="end_date"/>
-                            </group>
+                            <div>
+                                <h1>
+                                    <group>
+                                        <field name="name"/>
+                                    </group>
+                                </h1>
+                            </div>
                         </group>
+
+                        <notebook>
+                            <page string="General">
+                                <group>
+                                    <field name="instructor_id"/>
+                                    <field name="student_count" widget="progressbar"/>
+                                    <field name="color"/>
+                                </group>
+                            </page>
+                            <page string="Schedule">
+                                <group>
+                                   <field name="start_date"/>
+                                    <field name="duration"/>
+                                    <field name="end_date"/>
+                                    <field name="seats"/>
+                                </group>
+                            </page>
+                            <page string="Student">
+                                <group>
+                                    <field name="student_ids"/>
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -39,7 +53,7 @@
             <field name="arch" type="xml">
                 <tree string="Section Tree">
                     <field name="name"/>
-                    <field name="student_ids"/>
+                    <field name="instructor_id"/>
                     <field name="duration"/>
                     <field name="seats"/>
                 </tree>
@@ -52,14 +66,6 @@
             <field name="res_model">school.section</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <!--<field name="search_view_id" ref="_search"/>-->
-            <!--<field name="help" type="html">-->
-              <!--<p class="oe_view_nocontent_create">-->
-
-              <!--</p>Create your First Section<p>-->
-
-              <!--</p>-->
-            <!--</field>-->
         </record>
 
         <menuitem id="main_openacad" name="Open Academy"/>
@@ -70,6 +76,8 @@
         <menuitem id="main_section" name="Section" action="section_action"
                   parent="main_myschool" />
 
+
+
         <!--Student-->
 
         <record id="student_form" model="ir.ui.view">
@@ -77,13 +85,16 @@
             <field name="model">school.student</field>
             <field name="arch" type="xml">
                 <form string="Student">
-                    <!--<header>-->
-                        <!---->
-                    <!--</header>-->
                     <sheet>
                         <group>
-                            <field name="name"/>
-                            <field name="section_id"/>
+                            <group string="Student Name">
+                                <field name="first_name"/>
+                                <field name="middle_name"/>
+                                <field name="last_name"/>
+                            </group>
+                            <group string="Section">
+                                <field name="section_id"/>
+                            </group>
                         </group>
                     </sheet>
 
@@ -98,7 +109,6 @@
                 <tree string="Student">
                     <field name="name"/>
                     <field name="section_id"/>
-
                 </tree>
             </field>
         </record>
@@ -111,7 +121,7 @@
         </record>
 
         <menuitem id="main_student" action="student_action"
-                  parent="main_myschool" sequence="10" />
+                  parent="main_myschool"/>
 
     </data>
 </odoo>
